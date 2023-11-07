@@ -1,13 +1,16 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
   entry: "./src/client/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist/public"),
+    publicPath: "/",
     filename: "bundle.js",
   },
+  target: "web",
   module: {
     rules: [
       {
@@ -26,10 +29,17 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./src/client/index.html",
+      filename: "index.html",
+      inject: true,
+    }),
+  ],
   devServer: {
     static: {
-      directory: path.join(__dirname, "public"),
+      directory: path.join(__dirname, "dist"),
     },
     historyApiFallback: true,
     devMiddleware: {

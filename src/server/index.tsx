@@ -1,25 +1,15 @@
-import express from "express";
-import React from "react";
-import ReactDOMServer from "react-dom/server";
-
+const express = require("express");
+const path = require("path");
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, "../dist/public")));
+
 app.get("*", (req, res) => {
-  const html = ReactDOMServer.renderToString(
-    <div>Minha App SSR com React</div>
-  );
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>SSR com React</title>
-      </head>
-      <body>
-        <div id="app">${html}</div>
-        <script src="/bundle.js"></script>
-      </body>
-    </html>
-  `);
+  res.sendFile(path.resolve(__dirname, "../dist/public", "index.html"));
 });
 
-app.listen(3000, () => console.log(`Server is listening on port: 3000`));
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
