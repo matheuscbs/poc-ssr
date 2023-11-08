@@ -1,10 +1,11 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: "./src/client/index.tsx",
+  entry: path.resolve(__dirname, "./src/client/index.tsx"),
   output: {
     path: path.resolve(__dirname, "dist/public"),
     publicPath: "/",
@@ -32,7 +33,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: "./src/client/index.html",
+      template: path.resolve(__dirname, "./src/client/index.html"),
       filename: "index.html",
       inject: true,
     }),
@@ -47,6 +48,7 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".json"],
+    plugins: [new TsconfigPathsPlugin()],
   },
 };

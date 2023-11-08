@@ -15,14 +15,45 @@
       "esnext"
     ],
     "rootDir": "src",
-    "baseUrl": "src",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@core/*": [
+        "src/domain/*"
+      ],
+      "@entities/*": [
+        "src/domain/entities/*"
+      ],
+      "@useCases/*": [
+        "src/domain/use_cases/*"
+      ],
+      "@infrastructure/*": [
+        "src/infrastructure/*"
+      ],
+      "@server/*": [
+        "src/infrastructure/server/*"
+      ],
+      "@presentation/*": [
+        "src/presentation/*"
+      ],
+      "@components/*": [
+        "src/presentation/components/*"
+      ],
+      "@hooks/*": [
+        "src/presentation/hooks/*"
+      ],
+      "@pages/*": [
+        "src/presentation/pages/*"
+      ]
+    },
   },
   "include": [
     "src"
   ],
-  "paths": {
-    "@/*": [
-      "*"
-    ]
-  },
+  "exclude": [
+    "../node_modules",
+    "../dist"
+  ]
 }
